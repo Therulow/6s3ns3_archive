@@ -277,7 +277,7 @@ def update_all(selected_year, selected_month):
 
     # ---- If valid date, fetch data from backend ----
     response = requests.post(
-        f"{api_url}/bridge_model_prediction",
+        f"{deployment_url2}/bridge_model_prediction",
         headers={'Content-Type': 'application/json'},
         data=json.dumps({"year": selected_year, "month": selected_month})
     )
