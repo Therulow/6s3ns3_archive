@@ -80,20 +80,29 @@ model4_content = html.Div(
             myear_dropdown()
         ], style={"display": "flex", "justifyContent": "center", "alignItems": "center"}),
 
-        dbc.Toast(
+        # Add notification for invalid date
+        html.Div( children = [
+            dbc.Toast(
             id='error4',
             header="Error",
             is_open=False,
             duration=4000,  
             dismissable=True,
             style={
-                "position": "absolute",
-                "top": "370px",
-                "left": "900px",
+                "position": "relative",
                 "zIndex": 1000,
                 "backgroundColor": "rgba(255, 0, 0, 0.8)",
                 "color": "white"
             }
+        )
+        ], 
+        style={
+            "display": "flex",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "width": "100%",
+            "paddingTop": "20px",
+        }
         ),
 
 

@@ -191,7 +191,8 @@ comparemodels_content = html.Div(id="main-content",children=[
         'alignItems': 'center'
     }),
 
-    dbc.Toast(
+    html.Div( children = [
+        dbc.Toast(
             id='error6',
             header="Error",
             is_open=False,
@@ -203,6 +204,12 @@ comparemodels_content = html.Div(id="main-content",children=[
                 "color": "white"
             }
         ),
+    ]
+    , style={
+        'display': 'flex',
+        'justifyContent': 'center',
+        'alignItems': 'center'
+    }),
 
     html.Br(),
 
