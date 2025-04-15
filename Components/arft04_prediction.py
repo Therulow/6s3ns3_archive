@@ -1,27 +1,24 @@
-from package_imports import *
+from Components.package_imports import *
+from Components.data_load import load_data_bridge
+import os
+import certifi
+os.environ['SSL_CERT_FILE'] = certifi.where()
 
-fred = Fred(api_key = os.getenv("API_KEY"))
+def arft04_benchmark_prediction_df(date):
+    X, y = load_data_bridge(date)
+    y.index = pd.to_datetime(y.index).to_period('Q')
+    model =  AutoReg(y, lags = 4, trend = 'ct').fit()
 
-def arft04_prediction(date = "2020-01-01"):
-    train = get_most_recent_series_of_date("GDP", date, fred)
-    train = pct_chg(train)
+    # start_of_this_quarter_date = pd.Period(date, freq='Q').start_time
+    # if pd.Timestamp(date) == start_of_this_quarter_date:
+    #     y.iloc[-1] = np.nan
 
-    train = train["pct_chg"]
-
-    start_date_pred = train.index[-1] + pd.offsets.QuarterBegin(1, startingMonth= 1)
-    end_date_pred = pd.Period(date, freq='Q').start_time
-    
-    model = AutoReg(train, lags = 4, trend = 'ct').fit()
-    pred = model.predict(start = start_date_pred, end = end_date_pred)
-
-    train = train.to_frame()
-    train["Indicator"] = "Actual"
-    pred = pred.to_frame().rename(columns = {0: "pct_chg"})
-    pred["Indicator"] = "Forecast"
-
-    df = pd.concat([train, pred])
-    df.index = pd.to_datetime(df.index).to_period('Q')
-
+    df = y.to_frame().rename(columns = {0: "Actual GDP", "pct_chg": "Actual GDP"})
+    predicted_gdp_values =  pd.concat([model.fittedvalues, model.predict(len(y), end = len(y))]).to_frame().rename(columns = {0: "Predicted GDP"})
+    start_of_this_quarter_date = pd.Period(date, freq='Q').start_time
+    if pd.Timestamp(date) == start_of_this_quarter_date:
+        df["Actual GDP"].iloc[-1] = np.nan
+    df = pd.concat([df, predicted_gdp_values], axis = 1)
+    df = df.to_timestamp()
+    df.index = df.index.to_period("Q")
     return df
-
-    

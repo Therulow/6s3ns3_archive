@@ -2,10 +2,10 @@ from package_imports import *
 
 fred = Fred(api_key = os.getenv("API_KEY"))
 
-given_date = "2020-01-01"
+given_date = "2011-07-01"
 
 df = get_most_recent_series_of_date("ANDENO", given_date, fred)
-df = df[df.index<=pd.to_datetime("2006-06-01")]
+df = df[df.index<=pd.to_datetime("2007-06-01")]
 
 pct_chg_nondefense_capital_goods = transform_series(df, 5).dropna()
 # print(pct_chg_nondefense_capital_goods)
@@ -41,7 +41,7 @@ pct_chg_pred = pd.concat([pct_chg_nondefense_capital_goods, pred])
 
 quarterly_pct_chage = pct_chg_pred.resample('QS').sum()
 
-def quart_pct_chg_pce(date = "2020-01-01", period = 'Q'):
+def quart_pct_cap(date = "2020-01-01", period = 'Q'):
     given_date = "2020-01-01"
     fred = Fred(api_key = os.getenv("API_KEY"))
     df = get_most_recent_series_of_date("ANDENO", given_date, fred)

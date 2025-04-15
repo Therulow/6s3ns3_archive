@@ -2,10 +2,10 @@ from package_imports import *
 
 fred = Fred(api_key = os.getenv("API_KEY"))
 
-given_date = "2020-01-01"
+given_date = "2010-05-01"
 
 df = get_most_recent_series_of_date("BOPTEXP", given_date, fred)
-df = df[df.index<=pd.to_datetime("2006-06-01")]
+df = df[df.index<=pd.to_datetime("2007-06-01")]
 
 
 pct_chg_exports_bop = transform_series(df, 5).dropna()*100

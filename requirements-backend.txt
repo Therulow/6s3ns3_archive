@@ -1,0 +1,34 @@
+dash==3.0.0
+dash-bootstrap-components==2.0.0
+Flask==3.0.3
+fredapi==0.5.2
+gunicorn==20.1.0
+pandas==1.4.3
+scikit-learn==1.4.0
+certifi
+numpy
+python-dotenv
+requests
+matplotlib==3.5.2
+statsmodels==0.14.4
+arch==5.2.0
+midaspy @ git+https://github.com/Yoseph-Zuskin/midaspy.git@191108ea02954558c1a2e1d938ebce7f9a1d16a3
+plotly==5.10.0
+dash==3.0.0
+dash-bootstrap-components==2.0.0
+Flask==3.0.3
+fredapi==0.5.2
+gunicorn==20.1.0
+pandas==1.4.3
+scikit-learn==1.4.0
+certifi
+numpy
+python-dotenv
+requests
+matplotlib==3.5.2
+statsmodels==0.14.4
+seaborn==0.12.2
+arch==5.2.0
+midaspy @ git+https://github.com/Yoseph-Zuskin/midaspy.git@191108ea02954558c1a2e1d938ebce7f9a1d16a3
+plotly==5.10.0
+prophet==1.1.5

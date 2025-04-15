@@ -2,10 +2,10 @@ from package_imports import *
 
 fred = Fred(api_key = os.getenv("API_KEY"))
 
-given_date = "2006-12-01"
+given_date = "2007-12-01"
 
 df = get_most_recent_series_of_date("PCE", given_date, fred)
-df = df[df.index<=pd.to_datetime("2006-06-01")]
+df = df[df.index<=pd.to_datetime("2007-06-01")]
 
 pct_chg_pce = transform_series(df, 5).dropna()*100
 # pct_chg_pce.plot()
@@ -13,21 +13,21 @@ pct_chg_pce = transform_series(df, 5).dropna()*100
 
 # checking for stationarity
 # print("ADF Test Result: ", adfuller(pct_chg_pce, regression='c'))
-# plot_acf_pacf(pct_chg_pce)
-# plt.show()
+plot_acf_pacf(pct_chg_pce)
+plt.show()
 
 # gridsearch chosen base on pcf and acf
 #seasonal order based on acf
-best_arma(pct_chg_pce, trend='c', test_size=10, start_p= 0, start_q=0, max_p=5, max_q=5, seasonal_order = (1, 0, 0, 6))
-model = ARIMA(pct_chg_pce, order=(4, 0, 3), trend = 'c', freq = 'MS', seasonal_order=(0, 0, 0, 6))
-model = model.fit(start_params = np.full(4+3+6+1, .01))
+# best_arma(pct_chg_pce, trend='c', test_size=10, start_p= 0, start_q=0, max_p=5, max_q=5)
+model = ARIMA(pct_chg_pce, order=(4, 0, 3), trend = 'c', freq = 'MS')
+model = model.fit(start_params = np.full(4+3+1, .01))
  
-# fig, ax = plt.subplots()
-# ax.plot(model.fittedvalues)
-# ax.plot(pct_chg_pce)
-# plt.show()
+fig, ax = plt.subplots()
+ax.plot(model.fittedvalues)
+ax.plot(pct_chg_pce)
+plt.show()
 
-# plot_acf_pacf(model.resid)
+plot_acf_pacf(model.resid)
 plt.plot(model.resid)
 plt.show()
 

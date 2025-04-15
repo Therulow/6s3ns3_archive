@@ -21,3 +21,5 @@ df = difference_df(df, 1)
 diff_df = df['Diff_Value']
 
 #might want to take first difference of gdp
+sahm = get_most_recent_series_of_date("SAHMREALTIME", "2020-01-01", fred)
+

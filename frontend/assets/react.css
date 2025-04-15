@@ -98,22 +98,49 @@ body, html {
 }
 
 
-.rc-slider-rail {
-    background-color: grey !important;
-    height: 4px;
-    border-radius: 2px;
+.myear-dropdown .Select-control{
+  background-color: rgba(248, 232, 217, 0.95) !important;
+  border-radius: 10px !important;
+  font-family: "Montserrat", sans-serif;
+  border: none !important;
+  width: 150px; 
+  font-size: 16px;
 }
 
-/* Selected range between thumbs (track) */
-.rc-slider-track {
-    background-color: orange !important;
-    height: 4px;
+.myear-dropdown .Select-menu {
+  border-radius: 10px !important;
+  background-color: rgba(248, 232, 217, 0.95) !important;
+  border: none !important;
 }
 
-/* Optional: make thumbs stand out */
-.rc-slider-handle {
-    border: 2px solid orange !important;
-    background-color: white !important;
-    box-shadow: 0 0 5px orange;
+.myear-dropdown .Select-menu-outer {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: rgba(248, 232, 217, 0.95) !important;
+  border-radius: 10px !important;
 }
+
+.comparemodels-dropdown .Select-control { 
+  background-color: rgba(248, 232, 217, 0.95) !important;
+  font-weight: bold;
+  border: 1px solid white !important;
+}
+
+.comparemodels-dropdown .Select-menu {
+  background-color: rgba(248, 232, 217, 0.95) !important;
+}
+
+.comparemodels-dropdown .Select-option {
+  background-color: rgba(248, 232, 217, 0.95) !important;
+  color: white !important;   
+}
+
+.comparemodels-dropdown .Select-placeholder {
+  background-color: rgba(248, 232, 217, 0.95) !important;
+  color: white !important;   
+}
+
+
+
+
 

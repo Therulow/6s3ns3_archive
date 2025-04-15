@@ -2,24 +2,21 @@ from package_imports import *
 
 fred = Fred(api_key = os.getenv("API_KEY"))
 
-get_date = "2006-12-01"
+get_date = "2007-12-01"
 df = get_most_recent_series_of_date("HOUST", get_date, fred)
-df = df[df.index<=pd.to_datetime("2006-06-01")]
+df = df[df.index<=pd.to_datetime("2007-06-01")]
 
 pct_chg_housing_units_started = transform_series(df, 4)
-# pct_chg_housing_units_started.plot()
-# plt.show()
-pct_chg_housing_units_started = pct_chg_housing_units_started.diff().dropna() ## recommended transformation seems to be inadequate in making the data series stationary, so additional differencing required
-# pct_chg_housing_units_started.plot()
-# plt.show()
+pct_chg_housing_units_started.plot()
+plt.show()
 
-# print("ADF Test Result: ", adfuller(pct_chg_housing_units_started))
+print("ADF Test Result: ", adfuller(pct_chg_housing_units_started))
 # plot_acf_pacf(pct_chg_housing_units_started )
-# plt.show() ## guess p = 1, q = 1 for ARIMA model
+# plt.show() 
 
-# best_p, best_q = best_arma(pct_chg_housing_units_started, max_p = 1, max_q = 1, trend = "n", test_size = 10) ## best p and q are 1 and 1 respectively
-model = ARIMA(pct_chg_housing_units_started, order=(1, 0, 1), trend = 'n', freq = 'MS')
-model = model.fit(start_params = np.full(1 + 1 + 1, .01))
+# best_p, best_q = best_arma(pct_chg_housing_units_started, max_p = 5,start_q=15,  max_q = 17, trend = "c", test_size = 10) ## best p and q are 1 and 1 respectively
+model = ARIMA(pct_chg_housing_units_started, order=(3, 0, 16), trend = 'n', freq = 'MS')
+model = model.fit(start_params = np.full(25, .01))
 
 # fig, ax = plt.subplots()
 # ax.plot(model.fittedvalues, label = "fitted")
